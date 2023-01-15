@@ -1,0 +1,11 @@
+Dockerfile which is used to build an image for a containerized application. The instructions in the Dockerfile will be executed in the order they are written.
+1. The first instruction FROM node:16-alpine specifies the base image for the container. In this case, it is using the "node:16-alpine" image, which is a minimal Alpine Linux image with Node.js version 16 installed.
+2. The instruction WORKDIR /app sets the working directory for the remaining instructions in the Dockerfile to the "/app" directory in the container.
+3. The instruction COPY package.json yarn.lock ./ copies the "package.json" and "yarn.lock" files from the build context (the directory where the Dockerfile is located) to the working directory in the container.
+4. The instruction RUN yarn runs the yarn package manager to install the dependencies specified in the "package.json" file.
+5. The instruction RUN npm i --force runs npm package manager to install the dependencies specified in the "package.json" file. It uses --force flag because it will install the missing or invalid dependencies.
+6. The instruction COPY . . copies the remaining files from the build context to the working directory in the container.
+7. The instruction EXPOSE 5173 tells the container to listen on port 5173.
+8. The instruction CMD [ "yarn","dev", "--host" ] sets the command that will be run when the container is started. In this case, it runs the "yarn" command with "dev" and "--host" arguments.
+Once the image is built, it can be run as a container, and the application will be available on port 5173. And, the command yarn dev --host will run the development server of the application with the host flag.
+

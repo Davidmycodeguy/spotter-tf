@@ -1,0 +1,11 @@
+Dockerfile, which is used to build an image for a containerized application. The instructions in the Dockerfile will be executed in the order they are written.
+1. The first instruction FROM node:16-alpine specifies the base image for the container. In this case, it is using the "node:16-alpine" image, which is a minimal Alpine Linux image with Node.js version 16 installed.
+2. The instruction WORKDIR /app sets the working directory for the remaining instructions in the Dockerfile to the "/app" directory in the container.
+3. The instruction COPY package.json yarn.lock ./ copies the "package.json" and "yarn.lock" files from the build context (the directory where the Dockerfile is located) to the working directory in the container.
+4. The instruction RUN yarn runs the yarn package manager to install the dependencies specified in the "package.json" file.
+5. The instruction COPY . . copies the remaining files from the build context to the working directory in the container.
+6. The instruction EXPOSE 3005 tells the container to listen on port 3005.
+7. The instruction RUN npx prisma generate runs the prisma generate command using npx. This command will generate the Prisma client based on the Prisma schema file.
+8. The instruction CMD [ "yarn","dev" ] sets the command that will be run when the container is started. In this case, it runs the "yarn" command with "dev" argument.
+Once the image is built, it can be run as a container, and the application will be available on port 3005. And, the command `yarn
+
